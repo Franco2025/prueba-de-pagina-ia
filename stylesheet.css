@@ -22,11 +22,11 @@
     overflow-x: hidden;
   }
   
-  /* Notas musicales flotantes */
+  /* Notas musicales flotantes desde abajo */
   .note {
     position: fixed;
-    bottom: -50px;
-    font-size: 35px;
+    bottom: -10vh;
+    font-size: 25px;
     opacity: 0.15;
     pointer-events: none;
     animation-name: floatNote;
@@ -58,7 +58,11 @@
     animation: sloganAnim 3s ease-in-out infinite alternate; 
   }
   
-  @keyframes sloganAnim { 0% { transform: translateY(0); opacity: 0.8; } 50% { transform: translateY(-5px); opacity: 1; } 100% { transform: translateY(0); opacity: 0.8; } }
+  @keyframes sloganAnim { 
+    0% { transform: translateY(0); opacity: 0.8; } 
+    50% { transform: translateY(-5px); opacity: 1; } 
+    100% { transform: translateY(0); opacity: 0.8; } 
+  }
   
   /* Secciones */
   section { 
@@ -93,12 +97,12 @@
     100% { text-shadow: 0 0 5px #ff8c42,0 0 10px #ffa860,0 0 15px #ff8c42; }
   }
   
-  /* Botones decorados más grandes */
+  /* Botones decorados grandes */
   .audio-player button, .kick-button a, .whatsapp-button a, .social-links a {
     display: inline-block;
     color: white;
-    font-size: 1.6em; /* más grande */
-    padding: 15px 40px; /* más grande */
+    font-size: 1.6em; 
+    padding: 15px 40px; 
     border-radius: 10px;
     text-decoration: none;
     cursor: pointer;
@@ -106,58 +110,43 @@
     animation: gradientBtn 4s ease infinite, pulse 2s infinite;
   }
   
-  /* Audio Player button */
-  .audio-player button {
-    background: linear-gradient(45deg, #ff8c42, #ffa860);
-    background-size: 200% 200%;
-    border: none;
-  }
+  .audio-player button { background: linear-gradient(45deg, #ff8c42, #ffa860); border: none; }
   .audio-player button:hover { background-color: #e67630; }
   .audio-player audio { display: none; }
   
-  /* Kick button */
-  .kick-button a {
-    background: linear-gradient(45deg, #ff8c42, #ffa860);
-    background-size: 200% 200%;
-  }
+  .kick-button a { background: linear-gradient(45deg, #ff8c42, #ffa860); }
   .kick-button a:hover { background-color: #e67630; }
   
-  /* WhatsApp button */
-  .whatsapp-button a {
-    background: linear-gradient(45deg, #25D366, #20b858);
-    background-size: 200% 200%;
-  }
+  .whatsapp-button a { background: linear-gradient(45deg, #25D366, #20b858); }
   .whatsapp-button a:hover { background-color: #1DA851; }
   
-  /* Instagram */
-  .instagram { background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4); background-size:200% 200%; }
-  .instagram:hover { background-color:#dd2a7b; }
+  .instagram { background: linear-gradient(45deg, #C13584, #E1306C); }
+  .instagram:hover { background-color: #B42A74; }
   
-  /* Facebook */
-  .facebook { background: linear-gradient(45deg,#1877F2,#4267B2); background-size:200% 200%; }
-  .facebook:hover { background-color:#4267B2; }
+  .facebook { background: linear-gradient(45deg, #1877F2, #2D5DD6); }
+  .facebook:hover { background-color: #145BC5; }
   
-  /* Efecto pulse */
+  .social-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Efectos de botones */
   @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-  
-  /* Gradiente animado para botones */
   @keyframes gradientBtn { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  
-  /* Redes sociales contenedor */
-  .social-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
   
   /* Responsive */
   @media (max-width: 600px) {
     header h1 { font-size: 2em; }
     header p { font-size: 1em; }
     .welcome-letrero h2 { font-size: 1em; padding: 8px 12px; }
-    .kick-button a, .whatsapp-button a, .audio-player button, .social-links a { font-size: 1.3em; padding: 12px 30px; }
-  
-    /* Reducir partículas en móviles */
-    .note:nth-child(3n),
-    .note:nth-child(4n),
-    .note:nth-child(5n) {
-      display: none;
-    }
+    .kick-button a, .whatsapp-button a, .audio-player button, .social-links a { font-size: 1.3em; padding: 10px 25px; }
+    .note { font-size: 20px; }
   }
+  
+  /* Clase para desactivar animaciones en Android */
+  .no-animations * { animation: none !important; transition: none !important; }
+  .no-animations .note { display: none !important; }
   
