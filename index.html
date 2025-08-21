@@ -7,19 +7,18 @@
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-
   <!-- Header -->
   <header>
     <h1>FM Auténtica 🎶</h1>
     <p>estilo+actitud ✨</p>
   </header>
 
-  <!-- Bienvenida tipo letrero -->
+  <!-- Bienvenida -->
   <section class="fade-slide welcome-letrero">
     <h2>🎵 Bienvenidos a FM Auténtica, donde el estilo y la actitud suenan fuerte! 🎶</h2>
   </section>
 
-  <!-- Sección Audio Player -->
+  <!-- Audio Player -->
   <section class="fade-slide audio-player">
     <h2>Escuchá nuestra radio 🔊</h2>
     <button id="playButton">Reproducir ▶️</button>
@@ -29,56 +28,39 @@
     </audio>
   </section>
 
-  <!-- Sección Kick -->
+  <!-- Kick -->
   <section class="fade-slide kick-button">
     <h2>Mirá nuestra transmisión en vivo 📺</h2>
     <a href="https://kick.com/radiosecuencia" target="_blank">Ver en Kick 🚀</a>
   </section>
 
-  <!-- Sección WhatsApp -->
+  <!-- WhatsApp -->
   <section class="fade-slide whatsapp-button">
     <h2>Contacto 💬</h2>
     <a href="https://wa.me/542215087256" target="_blank">Chateá con nosotros 📱</a>
   </section>
 
-  <!-- Sección Redes Sociales -->
-  <section class="fade-slide social-buttons">
-    <h2>Seguinos en redes 🌐</h2>
-    <div class="social-links">
-      <a href="https://www.instagram.com/fmautentica88.1/" target="_blank" class="instagram">Instagram 📸</a>
-      <a href="https://www.facebook.com/profile.php?id=100063476626229" target="_blank" class="facebook">Facebook 👍</a>
+  <!-- Redes sociales -->
+  <section class="fade-slide social-links">
+    <h2>Seguinos 📲</h2>
+    <div class="social-container">
+      <a href="#" class="instagram">📸 Instagram</a>
+      <a href="#" class="facebook">📘 Facebook</a>
     </div>
   </section>
 
-  <!-- Notas musicales flotantes -->
-  <div class="note" style="left:5%; font-size:35px; animation-duration:22s;">🎵</div>
-  <div class="note" style="left:15%; font-size:30px; animation-duration:18s;">🎶</div>
-  <div class="note" style="left:25%; font-size:40px; animation-duration:20s;">♪</div>
-  <div class="note" style="left:35%; font-size:30px; animation-duration:25s;">♬</div>
-  <div class="note" style="left:45%; font-size:35px; animation-duration:23s;">🎵</div>
-  <div class="note" style="left:55%; font-size:30px; animation-duration:19s;">🎶</div>
-  <div class="note" style="left:65%; font-size:40px; animation-duration:21s;">♪</div>
-  <div class="note" style="left:75%; font-size:35px; animation-duration:24s;">♬</div>
-  <div class="note" style="left:85%; font-size:30px; animation-duration:20s;">🎵</div>
-  <div class="note" style="left:95%; font-size:35px; animation-duration:22s;">🎶</div>
-  <div class="note" style="left:10%; font-size:38px; animation-duration:21s;">🎵</div>
-  <div class="note" style="left:20%; font-size:32px; animation-duration:19s;">🎶</div>
-  <div class="note" style="left:30%; font-size:36px; animation-duration:23s;">♪</div>
-  <div class="note" style="left:40%; font-size:34px; animation-duration:22s;">♬</div>
-  <div class="note" style="left:50%; font-size:38px; animation-duration:25s;">🎵</div>
-  <div class="note" style="left:60%; font-size:32px; animation-duration:20s;">🎶</div>
-  <div class="note" style="left:70%; font-size:36px; animation-duration:24s;">♪</div>
-  <div class="note" style="left:80%; font-size:34px; animation-duration:23s;">♬</div>
-  <div class="note" style="left:90%; font-size:38px; animation-duration:21s;">🎵</div>
-  <div class="note" style="left:100%; font-size:32px; animation-duration:22s;">🎶</div>
-
   <script>
+    // Detectar Android para desactivar animaciones
+    if(/Android/i.test(navigator.userAgent)){
+      document.body.classList.add('no-animations');
+    }
+
+    // Reproductor de audio
     const playButton = document.getElementById('playButton');
     const radioPlayer = document.getElementById('radioPlayer');
     let isPlaying = false;
-
     playButton.addEventListener('click', () => {
-      if (!isPlaying) {
+      if(!isPlaying){
         radioPlayer.play();
         playButton.textContent = 'Detener 🔇';
         isPlaying = true;
@@ -89,7 +71,27 @@
         isPlaying = false;
       }
     });
-  </script>
 
+    // Crear partículas de notas musicales desde abajo
+    function createNotes(count) {
+      for(let i=0;i<count;i++){
+        const note = document.createElement('div');
+        note.className='note';
+        note.style.left = Math.random()*100+'vw';
+        note.style.bottom = '-10vh';
+        note.style.fontSize = (15 + Math.random()*20) + 'px';
+        note.style.animationDuration = (5 + Math.random()*10) + 's';
+        note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random()*5)];
+        document.body.appendChild(note);
+      }
+    }
+
+    // Cantidad diferente según dispositivo
+    if(/Android/i.test(navigator.userAgent)){
+      createNotes(10);
+    } else {
+      createNotes(40);
+    }
+  </script>
 </body>
 </html>
