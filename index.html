@@ -3,52 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FM Auténtica - Estilo + Actitud</title>
+  <title>FM Auténtica - estilo+actitud</title>
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <h1>FM Auténtica</h1>
-    <p>Estilo + Actitud</p>
+    <h1>FM Auténtica 🎶</h1>
+    <p>estilo+actitud ✨</p>
   </header>
 
-  <section>
-    <h2>📻 Escuchar en vivo</h2>
-    <div class="audio-player">
-      <audio id="radioAudio" src="https://server6.hostradios.com/8184/stream"></audio>
-      <button id="playBtn">▶️ Escuchar Radio</button>
-    </div>
+  <!-- Sección Audio Player -->
+  <section class="fade-slide audio-player">
+    <h2>Escuchá nuestra radio 🔊</h2>
+    <button id="playButton">Reproducir ▶️</button>
+    <audio id="radioPlayer">
+      <source src="https://server6.hostradios.com/8184/stream" type="audio/mpeg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
   </section>
 
-  <section>
-    <h2>🎥 Ver transmisión en vivo</h2>
-    <div class="kick-container">
-        <iframe 
-        src="https://player.kick.com/radiosecuencia"
-        height="450"
-        allowfullscreen>
-        </iframe>
-    </div>
-    </div>
-    <p class="click-note">Haz clic en el reproductor para activar audio y video.</p>
+  <!-- Sección Kick -->
+  <section class="fade-slide kick-button">
+    <h2>Mirá nuestra transmisión en vivo 📺</h2>
+    <a href="https://kick.com/radiosecuencia" target="_blank">Ver en Kick 🚀</a>
+  </section>
+
+  <!-- Sección WhatsApp -->
+  <section class="fade-slide whatsapp-button">
+    <h2>Contacto 💬</h2>
+    <a href="https://wa.me/542215087256" target="_blank">Chateá con nosotros 📱</a>
   </section>
 
   <script>
-    const audio = document.getElementById('radioAudio');
-    const btn = document.getElementById('playBtn');
+    const playButton = document.getElementById('playButton');
+    const radioPlayer = document.getElementById('radioPlayer');
+    let isPlaying = false;
 
-    btn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        btn.textContent = '⏸️ Pausar Radio';
+    playButton.addEventListener('click', () => {
+      if (!isPlaying) {
+        radioPlayer.play();
+        playButton.textContent = 'Detener 🔇';
+        isPlaying = true;
       } else {
-        audio.pause();
-        btn.textContent = '▶️ Escuchar Radio';
+        radioPlayer.pause();
+        radioPlayer.currentTime = 0;
+        playButton.textContent = 'Reproducir ▶️';
+        isPlaying = false;
       }
     });
   </script>
 
 </body>
 </html>
-
