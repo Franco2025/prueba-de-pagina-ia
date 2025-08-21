@@ -152,5 +152,12 @@
     header p { font-size: 1em; }
     .welcome-letrero h2 { font-size: 1em; padding: 8px 12px; }
     .kick-button a, .whatsapp-button a, .audio-player button, .social-links a { font-size: 1.3em; padding: 12px 30px; }
+  
+    /* Reducir partículas en móviles */
+    .note:nth-child(3n),
+    .note:nth-child(4n),
+    .note:nth-child(5n) {
+      display: none;
+    }
   }
   
