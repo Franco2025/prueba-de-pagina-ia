@@ -44,11 +44,11 @@
     <!-- Audio Player -->
     <section class="audio-player">
       <h2><i class="fa-solid fa-music"></i> Escuchá nuestra radio</h2>
-      <button id="playButton"><i class="fa-solid fa-play"></i> Reproducir</button>
-      <audio id="radioPlayer">
-        <source src="https://server6.hostradios.com/8184/stream" type="audio/mpeg" />
-        Tu navegador no soporta audio HTML5.
-      </audio>
+      <button id="playButton" aria-live="polite">
+        <i class="fa-solid fa-play"></i> Reproducir
+      </button>
+      <!-- Controlamos el src por JS para pegar al “vivo” -->
+      <audio id="radioPlayer" preload="none"></audio>
     </section>
 
     <!-- Kick -->
@@ -98,23 +98,95 @@
   </footer>
 
   <script>
-    // Reproductor de audio
+    const STREAM_URL = 'https://server6.hostradios.com/8184/stream';
     const playButton = document.getElementById('playButton');
     const radioPlayer = document.getElementById('radioPlayer');
-    let isPlaying = false;
 
+    // Estado del player
+    const STATE = {
+      IDLE: 'idle',
+      CONNECTING: 'connecting',
+      PLAYING: 'playing'
+    };
+    let state = STATE.IDLE;
+
+    function setButton(labelHTML, disabled = false) {
+      playButton.innerHTML = labelHTML;
+      playButton.disabled = disabled;
+      playButton.classList.toggle('is-loading', disabled);
+      playButton.setAttribute('aria-busy', disabled ? 'true' : 'false');
+    }
+
+    function toIdle() {
+      state = STATE.IDLE;
+      setButton('<i class="fa-solid fa-play"></i> Reproducir', false);
+    }
+
+    function toConnecting() {
+      state = STATE.CONNECTING;
+      // feedback INSTANTÁNEO
+      setButton('<i class="fa-solid fa-spinner fa-spin"></i> Conectando…', true);
+    }
+
+    function toPlaying() {
+      state = STATE.PLAYING;
+      setButton('<i class="fa-solid fa-stop"></i> Detener', false);
+    }
+
+    function startStream() {
+      // bust cache para pegar al vivo
+      radioPlayer.src = STREAM_URL + '?t=' + Date.now();
+      radioPlayer.load();
+      return radioPlayer.play();
+    }
+
+    function stopStream() {
+      radioPlayer.pause();
+      radioPlayer.removeAttribute('src'); // limpia buffer
+      radioPlayer.load();
+    }
+
+    // Click del botón
     playButton.addEventListener('click', () => {
-      if (!isPlaying) {
-        radioPlayer.play().catch(() => {});
-        playButton.innerHTML = '<i class="fa-solid fa-stop"></i> Detener';
-        isPlaying = true;
-      } else {
-        radioPlayer.pause();
-        radioPlayer.currentTime = 0;
-        playButton.innerHTML = '<i class="fa-solid fa-play"></i> Reproducir';
-        isPlaying = false;
+      if (state === STATE.PLAYING) {
+        // Detener
+        stopStream();
+        toIdle();
+        return;
       }
+
+      // Iniciar: cambiamos UI AL INSTANTE
+      toConnecting();
+      startStream()
+        .then(() => {
+          // algunos navegadores tardan en disparar 'playing'; damos feedback ya
+          toPlaying();
+        })
+        .catch(() => {
+          stopStream();
+          toIdle();
+        });
+    });
+
+    // Si el navegador avisa que está realmente reproduciendo
+    radioPlayer.addEventListener('playing', () => {
+      if (state === STATE.CONNECTING) toPlaying();
+    });
+
+    // Reintentos suaves si se corta estando en PLAYING
+    ['stalled', 'ended', 'error'].forEach(evt => {
+      radioPlayer.addEventListener(evt, () => {
+        if (state === STATE.PLAYING) {
+          // Intento silencioso de reenganchar al vivo
+          startStream().catch(() => {
+            // Si no vuelve, quedamos en idle
+            stopStream();
+            toIdle();
+          });
+        }
+      });
     });
   </script>
 </body>
 </html>
+
