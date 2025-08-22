@@ -44,13 +44,13 @@
   <section class="fade-slide social-links">
     <h2>Seguinos 📲</h2>
     <div class="social-container">
-      <a href="https://www.instagram.com/fmautentica88.1/" class="instagram">📸 Instagram</a>
-      <a href="https://www.facebook.com/profile.php?id=100063476626229" class="facebook">📘 Facebook</a>
+      <a href="https://www.instagram.com/fmautentica88.1/" class="instagram" target="_blank">📸 Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100063476626229" class="facebook" target="_blank">📘 Facebook</a>
     </div>
   </section>
 
   <script>
-    // Detectar Android para desactivar animaciones pesadas
+    // Detectar Android y desactivar animaciones pesadas
     if(/Android/i.test(navigator.userAgent)){
       document.body.classList.add('no-animations');
     }
@@ -72,48 +72,22 @@
       }
     });
 
-    // Crear partículas de notas musicales desde abajo y cubrir toda la pantalla
-    function createNotes(count) {
-      const screenWidth = window.innerWidth;
-      for (let i = 0; i < count; i++) {
-        const note = document.createElement('div');
-        note.className = 'note';
-        note.style.left = Math.random() * screenWidth + 'px';
-        note.style.bottom = '-10vh';
-        note.style.fontSize = (15 + Math.random() * 20) + 'px';
-        note.style.animationDuration = (5 + Math.random() * 10) + 's';
-        note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random() * 5)];
-        document.body.appendChild(note);
+    // Crear partículas musicales SOLO si no es Android
+    if(!/Android/i.test(navigator.userAgent)){
+      function createNotes(count) {
+        for(let i=0;i<count;i++){
+          const note = document.createElement('div');
+          note.className='note';
+          note.style.left = Math.random()*100+'vw';
+          note.style.bottom = '-10vh';
+          note.style.fontSize = (15 + Math.random()*20) + 'px';
+          note.style.animationDuration = (5 + Math.random()*10) + 's';
+          note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random()*5)];
+          document.body.appendChild(note);
+        }
       }
+      createNotes(50);
     }
-
-    // Cantidad diferente según dispositivo
-    if(/Android/i.test(navigator.userAgent)){
-      createNotes(10);
-    } else {
-      createNotes(40);
-    }
-
-    // Reajustar posiciones al cambiar tamaño de ventana
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.note').forEach(note => {
-        note.style.left = Math.random() * window.innerWidth + 'px';
-      });
-    });
   </script>
 </body>
-<!-- Contenedor para HTML extra -->
-<div id="extras"></div>
-
-<!-- Cargar HTML extra -->
-<script>
-fetch('extras.html')
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById('extras').innerHTML = html;
-  });
-</script>
-
-<!-- Cargar CSS extra al final -->
-<link rel="stylesheet" href="custom.css">
 </html>
