@@ -1,137 +1,91 @@
-/* Fondo animado degradado suave */
+/* Fondo animado elegante */
 @keyframes gradientBG {
-  0% { background: linear-gradient(135deg, #fff7f0, #ffe0c0, #fff3e0); }
-  25% { background: linear-gradient(135deg, #fff3e0, #ffe5c5, #fff7f0); }
-  50% { background: linear-gradient(135deg, #fff9f2, #ffe7c8, #fff3e0); }
-  75% { background: linear-gradient(135deg, #fff3e0, #ffe5c5, #fff7f0); }
-  100% { background: linear-gradient(135deg, #fff7f0, #ffe0c0, #fff3e0); }
+  0% { background: linear-gradient(135deg, #fff7f0, #ffe0c0); }
+  50% { background: linear-gradient(135deg, #ffe5c5, #fff9f2); }
+  100% { background: linear-gradient(135deg, #fff7f0, #ffe0c0); }
 }
 
 body {
-  font-family: Arial, sans-serif;
-  color: #333;
-  text-align: center;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  animation: gradientBG 60s ease infinite;
+  animation: gradientBG 25s ease infinite;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  color: #333;
   overflow-x: hidden;
-}
-
-/* Notas musicales flotantes desde abajo */
-.note {
-  position: fixed;
-  bottom: -10vh;
-  font-size: 25px;
-  opacity: 0.2;
-  pointer-events: none;
-  animation-name: floatNote;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  z-index: 1;
-}
-
-@keyframes floatNote {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
-  50% { opacity: 0.4; }
-  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0.2; }
+  position: relative;
 }
 
 /* Header */
-header { 
-  background-color: #ff8c42; 
-  color: white; 
-  padding: 15px 10px; 
-  width: 100%; 
-  box-sizing: border-box; 
-  z-index: 5; 
+header {
+  background-color: #ff8c42;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
-header h1 { margin: 0; font-size: 2.3em; }
-header p { 
-  margin: 3px 0 0; 
-  font-style: italic; 
-  font-size: 1.1em; 
-  display: inline-block; 
-  animation: sloganAnim 3s ease-in-out infinite alternate; 
-}
-
-@keyframes sloganAnim { 
-  0% { transform: translateY(0); opacity: 0.8; } 
-  50% { transform: translateY(-5px); opacity: 1; } 
-  100% { transform: translateY(0); opacity: 0.8; } 
-}
+header h1 { margin: 0; font-size: 2.5em; font-weight: 600; }
+header p { margin: 5px 0 0; font-style: italic; }
 
 /* Secciones */
-section { 
-  margin: 10px auto; 
-  max-width: 550px; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 10px; 
-  padding: 0 10px; 
-  z-index: 2; 
+section {
+  margin: 10px auto; /* botones más juntos */
+  max-width: 600px;
+  text-align: center;
+  padding: 0 15px;
+  position: relative;
+  z-index: 2;
 }
 
-.fade-slide { opacity: 0; transform: translateY(10px); animation: fadeSlide 1s forwards; }
-@keyframes fadeSlide { to { opacity: 1; transform: translateY(0); } }
-
-h2 { color: #ff8c42; margin-bottom: 10px; }
-
-/* Bienvenida tipo letrero */
-.welcome-letrero h2 {
-  font-size: 1.3em;
-  color: #fff;
-  background-color: #ff8c42;
-  padding: 12px 18px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px #ff8c42, 0 0 20px #ffa860, 0 0 30px #ff8c42;
-  animation: neon 1.5s infinite alternate;
-  z-index: 5;
-}
-@keyframes neon {
-  0% { text-shadow: 0 0 5px #ff8c42,0 0 10px #ffa860,0 0 15px #ff8c42; }
-  50% { text-shadow: 0 0 15px #ff8c42,0 0 30px #ffa860,0 0 45px #ff8c42; }
-  100% { text-shadow: 0 0 5px #ff8c42,0 0 10px #ffa860,0 0 15px #ff8c42; }
+h2 {
+  color: #ff8c42;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
-/* Botones decorados grandes */
-.audio-player button, .kick-button a, .whatsapp-button a, .social-links a {
+/* Bienvenida */
+.welcome h2 {
+  font-size: 1.8em;
+  margin-bottom: 5px;
+}
+.welcome p {
+  font-size: 1.1em;
+  color: #666;
+}
+
+/* Botones más grandes y juntos */
+button, .kick-button a, .contacto a, .social-links a {
   display: inline-block;
-  color: white;
-  font-size: 1.6em; 
-  padding: 15px 40px; 
-  border-radius: 10px;
-  text-decoration: none;
+  font-size: 1.2em;
+  padding: 16px 35px; /* más grandes */
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s;
-  animation: gradientBtn 4s ease infinite, pulse 2s infinite;
-  z-index: 3;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.3s ease;
+  margin: 8px 5px; /* menos espacio */
 }
 
-.audio-player button { background: linear-gradient(45deg, #ff8c42, #ffa860); border: none; }
-.audio-player button:hover { background-color: #e67630; }
-.audio-player audio { display: none; }
+button:hover, .kick-button a:hover, .contacto a:hover, .social-links a:hover {
+  transform: scale(1.05);
+}
 
+/* Estilos específicos */
+.audio-player button { background: linear-gradient(45deg, #ff8c42, #ffa860); }
 .kick-button a { background: linear-gradient(45deg, #ff8c42, #ffa860); }
-.kick-button a:hover { background-color: #e67630; }
-
-.whatsapp-button a { background: linear-gradient(45deg, #25D366, #20b858); }
-.whatsapp-button a:hover { background-color: #1DA851; }
-
+.contacto a.whatsapp { background: linear-gradient(45deg, #25D366, #20b858); }
 .instagram { background: linear-gradient(45deg, #C13584, #E1306C); }
-.instagram:hover { background-color: #B42A74; }
-
 .facebook { background: linear-gradient(45deg, #1877F2, #2D5DD6); }
-.facebook:hover { background-color: #145BC5; }
 
 .social-container {
   display: flex;
-  gap: 15px;
+  gap: 8px; /* más juntos */
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -139,31 +93,19 @@ h2 { color: #ff8c42; margin-bottom: 10px; }
 /* Footer */
 footer {
   margin-top: 20px;
-  background-color: #ff8c42;
+  background: #ff8c42;
   color: white;
-  padding: 10px;
-  width: 100%;
+  padding: 15px;
   text-align: center;
+  width: 100%;
   font-size: 0.9em;
-  z-index: 5;
+  position: relative;
+  z-index: 2;
 }
-
-/* Efectos de botones */
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-@keyframes gradientBtn { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
 /* Responsive */
 @media (max-width: 600px) {
   header h1 { font-size: 2em; }
-  header p { font-size: 1em; }
-  .welcome-letrero h2 { font-size: 1em; padding: 8px 12px; }
-  .kick-button a, .whatsapp-button a, .audio-player button, .social-links a { font-size: 1.3em; padding: 10px 25px; }
-  .note { font-size: 20px; }
+  .welcome h2 { font-size: 1.4em; }
+  button, .kick-button a, .contacto a, .social-links a { font-size: 1.1em; padding: 14px 25px; }
 }
-
-/* Android: desactivar solo animaciones pesadas */
-.no-animations .note { display: none !important; }
-.no-animations .audio-player button,
-.no-animations .kick-button a,
-.no-animations .whatsapp-button a,
-.no-animations .social-links a { animation: none !important; }
