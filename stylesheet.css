@@ -22,39 +22,33 @@ body {
   overflow-x: hidden;
 }
 
-/* Notas musicales flotantes desde abajo */
+/* Notas musicales */
 .note {
   position: fixed;
   bottom: -10vh;
   font-size: 25px;
-  opacity: 0.15;
+  opacity: 0.2;
   pointer-events: none;
   animation-name: floatNote;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  z-index: 1;
 }
-
 @keyframes floatNote {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.15; }
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
   50% { opacity: 0.4; }
-  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0.15; }
+  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0.2; }
 }
 
 /* Header */
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #ff8c42;
-  color: white;
-  padding: 15px 10px;
-  width: 100%;
-  box-sizing: border-box;
+header { 
+  background-color: #ff8c42; 
+  color: white; 
+  padding: 15px 10px; 
+  width: 100%; 
+  box-sizing: border-box; 
+  z-index: 2; 
 }
-header h1 { margin: 0; font-size: 2.3em; }
+header h1 { margin: 0; font-size: 2.3em; text-align: center; }
 header p { 
   margin: 3px 0 0; 
   font-style: italic; 
@@ -62,7 +56,6 @@ header p {
   display: inline-block; 
   animation: sloganAnim 3s ease-in-out infinite alternate; 
 }
-
 @keyframes sloganAnim { 
   0% { transform: translateY(0); opacity: 0.8; } 
   50% { transform: translateY(-5px); opacity: 1; } 
@@ -80,13 +73,11 @@ section {
   padding: 0 10px; 
   z-index: 2; 
 }
-
 .fade-slide { opacity: 0; transform: translateY(10px); animation: fadeSlide 1s forwards; }
 @keyframes fadeSlide { to { opacity: 1; transform: translateY(0); } }
-
 h2 { color: #ff8c42; margin-bottom: 10px; }
 
-/* Bienvenida tipo letrero */
+/* Bienvenida */
 .welcome-letrero h2 {
   font-size: 1.3em;
   color: #fff;
@@ -95,7 +86,6 @@ h2 { color: #ff8c42; margin-bottom: 10px; }
   border-radius: 12px;
   box-shadow: 0 0 10px #ff8c42, 0 0 20px #ffa860, 0 0 30px #ff8c42;
   animation: neon 1.5s infinite alternate;
-  z-index: 2;
 }
 @keyframes neon {
   0% { text-shadow: 0 0 5px #ff8c42,0 0 10px #ffa860,0 0 15px #ff8c42; }
@@ -103,7 +93,7 @@ h2 { color: #ff8c42; margin-bottom: 10px; }
   100% { text-shadow: 0 0 5px #ff8c42,0 0 10px #ffa860,0 0 15px #ff8c42; }
 }
 
-/* Botones decorados grandes */
+/* Botones */
 .audio-player button, .kick-button a, .whatsapp-button a, .social-links a {
   display: inline-block;
   color: white;
@@ -114,33 +104,19 @@ h2 { color: #ff8c42; margin-bottom: 10px; }
   cursor: pointer;
   transition: all 0.3s;
   animation: gradientBtn 4s ease infinite, pulse 2s infinite;
-  z-index: 2;
 }
-
 .audio-player button { background: linear-gradient(45deg, #ff8c42, #ffa860); border: none; }
 .audio-player button:hover { background-color: #e67630; }
 .audio-player audio { display: none; }
-
 .kick-button a { background: linear-gradient(45deg, #ff8c42, #ffa860); }
 .kick-button a:hover { background-color: #e67630; }
-
 .whatsapp-button a { background: linear-gradient(45deg, #25D366, #20b858); }
 .whatsapp-button a:hover { background-color: #1DA851; }
-
 .instagram { background: linear-gradient(45deg, #C13584, #E1306C); }
-.instagram:hover { background-color: #B42A74; }
-
 .facebook { background: linear-gradient(45deg, #1877F2, #2D5DD6); }
-.facebook:hover { background-color: #145BC5; }
+.social-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
 
-.social-container {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Efectos de botones */
+/* Efectos */
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 @keyframes gradientBtn { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
@@ -153,9 +129,20 @@ h2 { color: #ff8c42; margin-bottom: 10px; }
   .note { font-size: 20px; }
 }
 
-/* Android: desactivar solo animaciones pesadas */
+/* Android optimización */
+.no-animations body {
+  animation: none !important;
+  background: linear-gradient(135deg, #fff7f0, #ffe0c0, #fff3e0) !important;
+}
 .no-animations .note { display: none !important; }
+.no-animations .welcome-letrero h2 {
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
 .no-animations .audio-player button,
 .no-animations .kick-button a,
 .no-animations .whatsapp-button a,
-.no-animations .social-links a { animation: none !important; }
+.no-animations .social-links a {
+  animation: none !important;
+}
