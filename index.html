@@ -1,73 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
   <title>FM Auténtica - estilo + actitud</title>
-  <link rel="icon" href="marca-de-agua.icon.ico" type="image/x-icon">
+
+  <!-- Favicon -->
+  <link rel="icon" href="marca-de-agua.icon.ico" type="image/x-icon" />
 
   <!-- Fuente moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Íconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
 
-  <link rel="stylesheet" href="stylesheet.css">
+  <link rel="stylesheet" href="stylesheet.css" />
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (franja completa) -->
   <header>
-    <h1>FM Auténtica</h1>
-    <p>estilo + actitud</p>
+    <div class="container">
+      <h1>FM Auténtica</h1>
+      <p>estilo + actitud</p>
+    </div>
   </header>
 
-  <!-- Bienvenida -->
-  <section class="welcome">
-    <h2>Bienvenidos a FM Auténtica</h2>
-    <p>Donde el estilo y la actitud suenan fuerte</p>
-  </section>
+  <main class="container">
+    <!-- Bienvenida -->
+    <section class="welcome">
+      <h2>Bienvenidos a FM Auténtica</h2>
+      <p>Donde el estilo y la actitud suenan fuerte</p>
+    </section>
 
-  <!-- Audio Player -->
-  <section class="audio-player">
-    <h2><i class="fa-solid fa-music"></i> Escuchá nuestra radio</h2>
-    <button id="playButton"><i class="fa-solid fa-play"></i> Reproducir</button>
-    <audio id="radioPlayer">
-      <source src="https://server6.hostradios.com/8184/stream" type="audio/mpeg">
-      Tu navegador no soporta audio HTML5.
-    </audio>
-  </section>
+    <!-- Audio Player -->
+    <section class="audio-player">
+      <h2><i class="fa-solid fa-music"></i> Escuchá nuestra radio</h2>
+      <button id="playButton"><i class="fa-solid fa-play"></i> Reproducir</button>
+      <audio id="radioPlayer">
+        <source src="https://server6.hostradios.com/8184/stream" type="audio/mpeg" />
+        Tu navegador no soporta audio HTML5.
+      </audio>
+    </section>
 
-  <!-- Kick -->
-  <section class="kick-button">
-    <h2><i class="fa-solid fa-video"></i> Transmisión en vivo</h2>
-    <a href="https://kick.com/radiosecuencia" target="_blank">
-      <i class="fa-solid fa-tv"></i> Ver en Kick
-    </a>
-  </section>
-
-  <!-- Contacto -->
-  <section class="contacto">
-    <h2><i class="fa-solid fa-message"></i> Contacto</h2>
-    <a href="https://wa.me/542215087256" target="_blank" class="whatsapp">
-      <i class="fa-brands fa-whatsapp"></i> WhatsApp
-    </a>
-  </section>
-
-  <!-- Redes sociales -->
-  <section class="social-links">
-    <h2><i class="fa-solid fa-hashtag"></i> Seguinos</h2>
-    <div class="social-container">
-      <a href="https://www.instagram.com/fmautentica88.1/" target="_blank" class="instagram">
-        <i class="fa-brands fa-instagram"></i> Instagram
+    <!-- Kick -->
+    <section class="kick-button">
+      <h2><i class="fa-solid fa-video"></i> Transmisión en vivo</h2>
+      <a href="https://kick.com/radiosecuencia" target="_blank" rel="noopener">
+        <i class="fa-solid fa-tv"></i> Ver en Kick
       </a>
-      <a href="https://www.facebook.com/profile.php?id=100063476626229" target="_blank" class="facebook">
-        <i class="fa-brands fa-facebook"></i> Facebook
+    </section>
+
+    <!-- Contacto -->
+    <section class="contacto">
+      <h2><i class="fa-solid fa-message"></i> Contacto</h2>
+      <a href="https://wa.me/542215087256" target="_blank" rel="noopener" class="whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
       </a>
-    </div>
-  </section>
+    </section>
+
+    <!-- Redes sociales -->
+    <section class="social-links">
+      <h2><i class="fa-solid fa-hashtag"></i> Seguinos</h2>
+      <div class="social-container">
+        <a
+          href="https://www.instagram.com/fmautentica88.1/"
+          target="_blank"
+          rel="noopener"
+          class="instagram"
+        >
+          <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+        <a
+          href="https://www.facebook.com/profile.php?id=100063476626229"
+          target="_blank"
+          rel="noopener"
+          class="facebook"
+        >
+          <i class="fa-brands fa-facebook"></i> Facebook
+        </a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 FM Auténtica - Todos los derechos reservados</p>
+    <div class="container">
+      <p>&copy; 2025 FM Auténtica - Todos los derechos reservados</p>
+    </div>
   </footer>
 
   <script>
@@ -78,7 +105,7 @@
 
     playButton.addEventListener('click', () => {
       if (!isPlaying) {
-        radioPlayer.play();
+        radioPlayer.play().catch(() => {});
         playButton.innerHTML = '<i class="fa-solid fa-stop"></i> Detener';
         isPlaying = true;
       } else {
@@ -91,4 +118,3 @@
   </script>
 </body>
 </html>
-
