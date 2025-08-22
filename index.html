@@ -44,13 +44,13 @@
   <section class="fade-slide social-links">
     <h2>Seguinos 📲</h2>
     <div class="social-container">
-      <a href="#" class="instagram">📸 Instagram</a>
-      <a href="#" class="facebook">📘 Facebook</a>
+      <a href="https://www.instagram.com/fmautentica88.1/" class="instagram">📸 Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100063476626229" class="facebook">📘 Facebook</a>
     </div>
   </section>
 
   <script>
-    // Detectar Android para desactivar solo animaciones pesadas
+    // Detectar Android para desactivar animaciones pesadas
     if(/Android/i.test(navigator.userAgent)){
       document.body.classList.add('no-animations');
     }
@@ -72,16 +72,17 @@
       }
     });
 
-    // Crear partículas de notas musicales desde abajo
+    // Crear partículas de notas musicales desde abajo y cubrir toda la pantalla
     function createNotes(count) {
-      for(let i=0;i<count;i++){
+      const screenWidth = window.innerWidth;
+      for (let i = 0; i < count; i++) {
         const note = document.createElement('div');
-        note.className='note';
-        note.style.left = Math.random()*100+'vw';
+        note.className = 'note';
+        note.style.left = Math.random() * screenWidth + 'px';
         note.style.bottom = '-10vh';
-        note.style.fontSize = (15 + Math.random()*20) + 'px';
-        note.style.animationDuration = (5 + Math.random()*10) + 's';
-        note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random()*5)];
+        note.style.fontSize = (15 + Math.random() * 20) + 'px';
+        note.style.animationDuration = (5 + Math.random() * 10) + 's';
+        note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random() * 5)];
         document.body.appendChild(note);
       }
     }
@@ -92,6 +93,13 @@
     } else {
       createNotes(40);
     }
+
+    // Reajustar posiciones al cambiar tamaño de ventana
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.note').forEach(note => {
+        note.style.left = Math.random() * window.innerWidth + 'px';
+      });
+    });
   </script>
 </body>
 </html>
