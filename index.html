@@ -3,7 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FM Auténtica - estilo+actitud</title>
+  <title>FM Auténtica 88.1 - estilo+actitud</title>
+
+  <!-- Metadatos SEO -->
+  <meta name="description" content="FM Auténtica 88.1 🎶 - estilo+actitud. Escuchá en vivo nuestra radio, miranos por Kick y contactanos por WhatsApp.">
+  <meta name="keywords" content="radio, FM Auténtica, música, streaming, kick, argentina, online, 88.1">
+  <meta name="author" content="FM Auténtica">
+
+  <!-- Favicon -->
+  <link rel="icon" href="marca-de-agua.icon.ico" type="image/x-icon">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FM Auténtica 88.1 🎶 - estilo+actitud">
+  <meta property="og:description" content="Escuchá en vivo nuestra radio, miranos por Kick y contactanos por WhatsApp.">
+  <meta property="og:image" content="https://fmautentica881.com.ar/logo.png">
+  <meta property="og:url" content="https://fmautentica881.com.ar">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FM Auténtica 88.1">
+  <meta name="twitter:description" content="Escuchá en vivo nuestra radio y miranos por Kick 📻">
+  <meta name="twitter:image" content="https://fmautentica881.com.ar/logo.png">
+
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
@@ -21,7 +43,7 @@
   <!-- Audio Player -->
   <section class="fade-slide audio-player">
     <h2>Escuchá nuestra radio 🔊</h2>
-    <button id="playButton">Reproducir ▶️</button>
+    <button id="playButton" aria-label="Reproducir la radio">Reproducir ▶️</button>
     <audio id="radioPlayer">
       <source src="https://server6.hostradios.com/8184/stream" type="audio/mpeg">
       Tu navegador no soporta audio HTML5.
@@ -31,26 +53,32 @@
   <!-- Kick -->
   <section class="fade-slide kick-button">
     <h2>Mirá nuestra transmisión en vivo 📺</h2>
-    <a href="https://kick.com/radiosecuencia" target="_blank">Ver en Kick 🚀</a>
+    <a href="https://kick.com/radiosecuencia" target="_blank" rel="noopener noreferrer">Ver en Kick 🚀</a>
   </section>
 
   <!-- WhatsApp -->
   <section class="fade-slide whatsapp-button">
     <h2>Contacto 💬</h2>
-    <a href="https://wa.me/542215087256" target="_blank">Chateá con nosotros 📱</a>
+    <a href="https://wa.me/542215087256" target="_blank" rel="noopener noreferrer">Chateá con nosotros 📱</a>
   </section>
 
   <!-- Redes sociales -->
   <section class="fade-slide social-links">
     <h2>Seguinos 📲</h2>
     <div class="social-container">
-      <a href="https://www.instagram.com/fmautentica88.1/" class="instagram" target="_blank">📸 Instagram</a>
-      <a href="https://www.facebook.com/profile.php?id=100063476626229" class="facebook" target="_blank">📘 Facebook</a>
+      <a href="https://www.instagram.com/fmautentica88.1/" target="_blank" rel="noopener noreferrer" class="instagram">📸 Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100063476626229" target="_blank" rel="noopener noreferrer" class="facebook">📘 Facebook</a>
     </div>
   </section>
 
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 FM Auténtica 88.1 - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Scripts -->
   <script>
-    // Detectar Android y desactivar animaciones pesadas
+    // Detectar Android para desactivar solo animaciones pesadas
     if(/Android/i.test(navigator.userAgent)){
       document.body.classList.add('no-animations');
     }
@@ -72,20 +100,24 @@
       }
     });
 
-    // Crear partículas musicales SOLO si no es Android
-    if(!/Android/i.test(navigator.userAgent)){
-      function createNotes(count) {
-        for(let i=0;i<count;i++){
-          const note = document.createElement('div');
-          note.className='note';
-          note.style.left = Math.random()*100+'vw';
-          note.style.bottom = '-10vh';
-          note.style.fontSize = (15 + Math.random()*20) + 'px';
-          note.style.animationDuration = (5 + Math.random()*10) + 's';
-          note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random()*5)];
-          document.body.appendChild(note);
-        }
+    // Crear partículas de notas musicales desde abajo
+    function createNotes(count) {
+      for(let i=0;i<count;i++){
+        const note = document.createElement('div');
+        note.className='note';
+        note.style.left = Math.random()*100+'vw';
+        note.style.bottom = '-10vh';
+        note.style.fontSize = (15 + Math.random()*20) + 'px';
+        note.style.animationDuration = (5 + Math.random()*10) + 's';
+        note.textContent = ['🎵','🎶','🎼','🎹','🎤'][Math.floor(Math.random()*5)];
+        document.body.appendChild(note);
       }
+    }
+
+    // Cantidad diferente según dispositivo
+    if(/Android/i.test(navigator.userAgent)){
+      createNotes(10);
+    } else {
       createNotes(50);
     }
   </script>
